@@ -1,11 +1,14 @@
 package com.example.demo.repository;
 
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
@@ -68,4 +71,24 @@ public class UserRepository {
 
 		return user;
 	}
+
+	/**
+	 * メールアドレスからユーザー情報を検索します.
+	 * 
+	 * @param email メールアドレス
+	 * @return　ユーザー情報
+	 */
+	public User findByEmail(String email) {
+		String sql = "SELECT id, name, email, zipcode, address, telephone, password FROM users WHERE email = :email";
+		SqlParameterSource param = new MapSqlParameterSource().addValue("email", email);
+		List<User> userList = template.query(sql, param, USER_ROW_MAPPER);
+
+		if (userList.size() == 0) {
+			return null;
+		}
+
+		return userList.get(0);
+
+	}
+
 }
