@@ -16,6 +16,7 @@ public class UserRegisterForm {
 	private String name;
 	/** メールアドレス */
 	@Email(message = "不正なメールアドレスです。")
+	@NotBlank(message="メールアドレスを入力してください。")
 	private String email;
 	/** 郵便番号 */
 	@NotBlank(message = "郵便番号を入力してください。")
