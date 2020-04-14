@@ -29,8 +29,8 @@ public class ItemRepository {
 		Item item = new Item();
 		item.setId(rs.getInt("id"));
 		item.setName(rs.getString("name"));
-		item.setPrice_m(rs.getInt("price_m"));
-		item.setPrice_l(rs.getInt("price_l"));
+		item.setPriceM(rs.getInt("price_m"));
+		item.setPriceL(rs.getInt("price_l"));
 		item.setImagePath(rs.getString("image_path"));
 		item.setDescription(rs.getString("description"));
 		item.setDeleted(rs.getBoolean("deleted"));

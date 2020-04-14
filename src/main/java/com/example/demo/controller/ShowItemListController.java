@@ -30,6 +30,7 @@ public class ShowItemListController {
 	 * @param model リクエストスコープ作成
 	 * @return 商品一覧画面
 	 */
+	@RequestMapping("")
 	public String showList(Model model) {
 		List<Item> itemList = showItemListService.showItemList();
 

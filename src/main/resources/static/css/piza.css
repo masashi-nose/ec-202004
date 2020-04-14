@@ -23,11 +23,20 @@ span#total-price {
   margin-left: auto; 
   margin-right: auto;
 }
-/* 商品一覧のセルを固定幅にする*/
-.item-list-table{
-	table-layout: fixed;
+
+.text-center{
+	margin-left: auto; 
+    margin-right: auto;
 }
 
-th{
-	text-align: center;
+
+.item-container{
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	gap: 50px;
+	
+}
+
+.item{
+	
 }

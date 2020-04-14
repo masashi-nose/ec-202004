@@ -16,9 +16,9 @@ public class Item {
 	/** 商品詳細 */
 	private String description;
 	/** 価格M */
-	private Integer price_m;
+	private Integer priceM;
 	/** 価格L */
-	private Integer price_l;
+	private Integer priceL;
 	/** 画像パス */
 	private String imagePath;
 	/** 削除フラグ */
@@ -28,9 +28,8 @@ public class Item {
 
 	@Override
 	public String toString() {
-		return "Item [id=" + id + ", name=" + name + ", description=" + description + ", price_m=" + price_m
-				+ ", price_l=" + price_l + ", imagePath=" + imagePath + ", deleted=" + deleted + ", toppingList="
-				+ toppingList + "]";
+		return "Item [id=" + id + ", name=" + name + ", description=" + description + ", priceM=" + priceM + ", priceL="
+				+ priceL + ", imagePath=" + imagePath + ", deleted=" + deleted + ", toppingList=" + toppingList + "]";
 	}
 
 	public Integer getId() {
@@ -57,20 +56,20 @@ public class Item {
 		this.description = description;
 	}
 
-	public Integer getPrice_m() {
-		return price_m;
+	public Integer getPriceM() {
+		return priceM;
 	}
 
-	public void setPrice_m(Integer price_m) {
-		this.price_m = price_m;
+	public void setPriceM(Integer priceM) {
+		this.priceM = priceM;
 	}
 
-	public Integer getPrice_l() {
-		return price_l;
+	public Integer getPriceL() {
+		return priceL;
 	}
 
-	public void setPrice_l(Integer price_l) {
-		this.price_l = price_l;
+	public void setPriceL(Integer priceL) {
+		this.priceL = priceL;
 	}
 
 	public String getImagePath() {
