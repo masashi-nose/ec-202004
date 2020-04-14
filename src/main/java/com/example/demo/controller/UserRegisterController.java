@@ -50,12 +50,26 @@ public class UserRegisterController {
 	 */
 	@RequestMapping("/register")
 	public String register(@Validated UserRegisterForm form, BindingResult result, Model model) {
-		User user = new User();
+		User checkUser = userRegisterService.findByEmail(form.getEmail());
+		
+		if(checkUser != null) {
+			result.rejectValue("email", "", "このメールアドレスは既に登録済みです。");
+		}
+		
+		if(!(form.getPassword().equals(form.getConfirmationPassword()))) {
+			result.rejectValue("confirmationPassword", "", "パスワードが異なります。");
+		}
+		
+		if(result.hasErrors()) {
+			return toRegister();
+		}
 
+		User user = new User();
 		user.setName(form.getName());
 		user.setEmail(form.getEmail());
 		user.setZipcode(form.getZipcode());
 		user.setAddress(form.getAddress());
+		user.setTelephone(form.getTelephone());
 		user.setPassword(form.getPassword());
 
 		userRegisterService.register(user);

@@ -30,4 +30,14 @@ public class UserRegisterService {
 		return userRepository.insertUser(user);
 
 	}
+
+	/**
+	 * メールアドレスからユーザーを検索します.
+	 * 
+	 * @param email メールアドレス
+	 * @return ユーザー情報
+	 */
+	public User findByEmail(String email) {
+		return userRepository.findByEmail(email);
+	}
 }

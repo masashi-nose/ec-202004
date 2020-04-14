@@ -12,25 +12,25 @@ import javax.validation.constraints.Pattern;
  */
 public class UserRegisterForm {
 	/** 名前 */
-	@NotBlank(message="名前を入力してください。")
+	@NotBlank(message = "名前を入力してください。")
 	private String name;
 	/** メールアドレス */
-	@Email(message="不正なメールアドレスです。")
+	@Email(message = "不正なメールアドレスです。")
 	private String email;
 	/** 郵便番号 */
-	@NotBlank(message="郵便番号を入力してください。")
+	@NotBlank(message = "郵便番号を入力してください。")
 	private String zipcode;
 	/** 住所 */
-	@NotBlank(message="住所を入力してください。")
+	@NotBlank(message = "住所を入力してください。")
 	private String address;
 	/** 電話番号 */
-	@Pattern(regexp="^[0-9]{3}-[0-9]{4}-[0-9]{4}$")
+	@Pattern(regexp = "^[0-9]{3}[0-9]{4}[0-9]{4}$", message = "不正な電話番号です。")
 	private String telephone;
 	/** パスワード */
-	@Pattern(regexp="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]){8,16}$", message="半角大小英字・数字を用い、8~16字で入力してください。")
+	@Pattern(regexp="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,16}$", message = "半角大小英字・数字を用い、8~16字で入力してください。")
 	private String password;
 	/** 確認用パスワード */
-	@NotBlank(message="確認用パスワードを入力してください。")
+	@NotBlank(message = "確認用パスワードを入力してください。")
 	private String confirmationPassword;
 
 	@Override
