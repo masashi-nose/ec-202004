@@ -20,8 +20,6 @@ public class ShowItemDetailController {
 
 	@Autowired
 	private ShowItemDetailService showItemDetailService;
-	
-	
 
 	/**
 	 * 商品詳細情報を表示します.
