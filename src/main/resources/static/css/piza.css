@@ -28,19 +28,25 @@ span#total-price {
 	margin-right: auto;
 }
 
-.item-container {
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
-	gap: 50px;
-}
-
 .detail-container {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	gap: 30px;
 }
 
-.topping {
-	display: inline-block;
-	width: 230px;
+#toppings { 
+  display: block;
+  float: left;
+  width: 230px;
+}
+
+.grid-container {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	gap: 50px;
+	justify-content: center;
+}
+
+.grid-item {
+	justify-self: center;
 }

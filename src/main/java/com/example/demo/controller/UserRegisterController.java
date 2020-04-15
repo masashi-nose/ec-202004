@@ -74,7 +74,7 @@ public class UserRegisterController {
 
 		userRegisterService.register(user);
 
-		return "redirect: /toLogin";
+		return "redirect:/toLogin";
 	}
 
 }

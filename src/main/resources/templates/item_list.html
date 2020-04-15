@@ -79,15 +79,16 @@
 		<br>
 		<!-- css gridで一覧表示させています。 -->
 		
-		<div class="item-container">
-			<div class="item" th:each="item:${itemList}">
-				<a href="item_detail.html" th:href="@{'/showDetail?id=' + ${item.id}}"> <img src="../static/img_curry/1.jpg"
+		<div class="grid-container">
+			<div class="grid-item" th:each="item:${itemList}">
+				<a href="item_detail.html" th:href="@{'/showDetail?id=' + ${item.id}}"> 
+				<img src="../static/img_curry/1.jpg"
 					th:src="@{/img_curry/} + ${item.imagePath}"
 					class="img-responsive img-rounded item-img-center" width="200"
 					height="600"></a>
 				<div class="text-center">
 				<br> <a href="item_detail.html" th:href="@{'/showDetail?id=' + ${item.id}}"><span
-					th:text="${item.name}"></span>じゃがバターベーコン</a><br> <span
+					th:text="${item.name}"></span></a><br> <span
 					class="price">&nbsp;М&nbsp;</span><span th:text="${#numbers.formatInteger(item.priceM ,1, 'COMMA') + '円(税抜)'}"></span><br>
 				<span class="price">&nbsp;Ｌ</span><span th:text="${#numbers.formatInteger(item.priceL ,1, 'COMMA') + '円(税抜)'}"></span><br>			
 			

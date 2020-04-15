@@ -76,13 +76,15 @@
 								<label for="inputResponsibleCompany">サイズ</label>
 							</div>
 							<div class="col-sm-12">
-								<label class="radio-inline"> <input type="radio"
-									name="responsibleCompany" checked="checked"> <span
-									class="price">&nbsp;М&nbsp;</span>&nbsp;&nbsp;<span
-									th:text="${#numbers.formatInteger(item.priceM, 1, 'COMMA') + '円（税抜）'}"></span>
-								</label> <label class="radio-inline"> <input type="radio"
-									name="responsibleCompany"> <span class="price">&nbsp;Ｌ</span>&nbsp;&nbsp;<span
-									th:text="${#numbers.formatInteger(item.priceL, 1, 'COMMA') + '円（税抜）'}"></span>
+								<label class="radio-inline"> 
+								<input type="radio" name="size" id="priceM" class="size" checked="checked" value="M"> 
+								<span class="price">&nbsp;М&nbsp;</span>&nbsp;&nbsp;
+								<span id="sizeM" th:text="${#numbers.formatInteger(item.priceM, 1, 'COMMA') + '円（税抜）'}"></span>
+								</label> 
+								<label class="radio-inline"> 
+								<input type="radio"	name="size" id="priceL" class="size" value="L"> 
+								<span class="price">&nbsp;Ｌ</span>&nbsp;&nbsp;
+								<span id="sizeL" th:text="${#numbers.formatInteger(item.priceL, 1, 'COMMA') + '円（税抜）'}"></span>
 								</label>
 							</div>
 						</div>
@@ -92,19 +94,20 @@
 								<label for="inputResponsibleCompany"> トッピング：&nbsp;1つにつき
 									<span>&nbsp;М&nbsp;</span>&nbsp;&nbsp;200円(税抜) <span>&nbsp;Ｌ</span>&nbsp;&nbsp;300円(税抜)
 								</label>
-							<div class="topping" th:each="topping:${item.toppingList}">
-								<label class="checkbox-inline"
-									> <input
-									type="checkbox" th:value="${topping.id}"><span
-									th:text="${topping.name}"></span>
-								</label>
+							<div class="checkbox-inline" id="topping">
+								<div id="toppings" th:each="topping:${item.toppingList}">
+									<label class="checkbox-inline">
+								 		<input	type="checkbox" class="checkbox" th:text="${topping.name}" th:value="${topping.id}">
+									</label>
+								</div>
 							</div>
 					</div>
 					<div class="form-group">
 						<div class="row">
 							<div class="col-xs-5 col-sm-5">
-								<label for="">数量:</label> <select name="area"
-									class="form-control">
+								<label for="">数量:</label>
+								 <select name="quantity"
+									class="form-control" id="currynum">
 									<option value="1">1</option>
 									<option value="2">2</option>
 									<option value="3">3</option>
@@ -123,7 +126,7 @@
 					</div>
 					<br>
 					<div class="form-group">
-						<span id="total-price">この商品金額：38,000 円(税抜)</span>
+						<span id="total-price">この商品金額：<span id="totalprice"></span>円（税抜）</span>
 					</div>
 						<p>
 							<input class="form-control btn btn-warning btn-block"
@@ -141,7 +144,9 @@
 	<!-- end container -->
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script src="../static/js/bootstrap.min.js"></script>
+	<script src="../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/total_calc.js}"></script>
+	
 
 </body>
 </html>
