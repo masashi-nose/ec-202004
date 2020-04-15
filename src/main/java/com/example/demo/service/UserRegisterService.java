@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +20,9 @@ public class UserRegisterService {
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	/**
 	 * ユーザー登録を行います. （ユーザー情報をusersテーブルにインサートします）
@@ -27,6 +31,8 @@ public class UserRegisterService {
 	 * @return IDが自動採番されたUserオブジェクト
 	 */
 	public User register(User user) {
+		String encordPassword = passwordEncoder.encode(user.getPassword());
+		user.setPassword(encordPassword);
 		return userRepository.insertUser(user);
 
 	}
