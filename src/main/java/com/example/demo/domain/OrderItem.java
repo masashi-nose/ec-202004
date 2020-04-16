@@ -12,13 +12,13 @@ public class OrderItem {
 	/** ID */
 	private Integer id;
 	/** 注文商品ID */
-	private Integer orderItemId;
+	private Integer itemId;
 	/** 注文ID */
 	private Integer orderId;
 	/** 数量 */
 	private Integer quantity;
 	/** 商品サイズ */
-	private Character size;
+	private String size;
 	/** 商品インスタンス */
 	private Item item;
 	/** 注文トッピングリスト */
@@ -26,8 +26,8 @@ public class OrderItem {
 
 	@Override
 	public String toString() {
-		return "OrderItem [id=" + id + ", orderItemId=" + orderItemId + ", orderId=" + orderId + ", quantity="
-				+ quantity + ", size=" + size + ", item=" + item + ", orderToppingList=" + orderToppingList + "]";
+		return "OrderItem [id=" + id + ", itemId=" + itemId + ", orderId=" + orderId + ", quantity=" + quantity
+				+ ", size=" + size + ", item=" + item + ", orderToppingList=" + orderToppingList + "]";
 	}
 
 	/**
@@ -38,7 +38,7 @@ public class OrderItem {
 	public int getSubTotal() {
 		int subTotal = 0;
 
-		if (size == 'M') {
+		if (size == "M") {
 			int toppingPrice = 200 * orderToppingList.size();
 			int itemPrice = item.getPriceM();
 			subTotal = (itemPrice + toppingPrice) * quantity;
@@ -61,12 +61,12 @@ public class OrderItem {
 		this.id = id;
 	}
 
-	public Integer getOrderItemId() {
-		return orderItemId;
+	public Integer getItemId() {
+		return itemId;
 	}
 
-	public void setOrderItemId(Integer orderItemId) {
-		this.orderItemId = orderItemId;
+	public void setItemId(Integer itemId) {
+		this.itemId = itemId;
 	}
 
 	public Integer getOrderId() {
@@ -85,11 +85,11 @@ public class OrderItem {
 		this.quantity = quantity;
 	}
 
-	public Character getSize() {
+	public String getSize() {
 		return size;
 	}
 
-	public void setSize(Character size) {
+	public void setSize(String size) {
 		this.size = size;
 	}
 
