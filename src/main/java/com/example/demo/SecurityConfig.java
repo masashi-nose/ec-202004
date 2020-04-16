@@ -26,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	
 	@Autowired
-	private UDSImplements uds; //udsの中にはLoginUserの情報が入っている.
+	private UDSImplements memberDetailsService; //udsの中にはLoginUserの情報が入っている.
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
@@ -52,7 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	 */
 	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(uds).passwordEncoder(new BCryptPasswordEncoder());
+		auth.userDetailsService(memberDetailsService).passwordEncoder(new BCryptPasswordEncoder());
 
 	}
 

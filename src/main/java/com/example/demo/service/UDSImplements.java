@@ -24,6 +24,10 @@ public class UDSImplements implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException{
 		User user = userRepository.findByEmail(email);
+		
+		if(user == null) {
+			throw new UsernameNotFoundException("そのメールアドレスは登録されていません。");
+		}
 	
 	Collection<GrantedAuthority> authorityList = new ArrayList<>();
 	authorityList.add(new SimpleGrantedAuthority("ROLE_USER")); //権限付与
