@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.domain.LoginUser;
 import com.example.demo.form.ShoppingCartForm;
-import com.example.demo.service.OrderService;
 import com.example.demo.service.ShoppingCartService;
 
 /**
@@ -27,8 +26,8 @@ public class ShoppingCartController {
 	@Autowired
 	private ShoppingCartService shoppingCartService;
 
-	@Autowired
-	private OrderService orderService;
+//	@Autowired
+//	private OrderService orderService;
 
 	@Autowired
 	private HttpSession session;
@@ -40,10 +39,14 @@ public class ShoppingCartController {
 
 	@RequestMapping("/insert")
 	public String addShoppingCart(ShoppingCartForm form, @AuthenticationPrincipal LoginUser loginUser) {
+		System.out.println("リクエストパラメータ" + form);
+		System.out.println(loginUser);
 		Integer userId = (Integer) session.getAttribute("userId");
 
+		System.out.println("ログインしているユーザーのIDは" + userId);
+		
 		if (userId == null) {
-			session.setAttribute("userId", session.getId());
+			session.setAttribute("userId", session.getId().hashCode());
 
 		}
 

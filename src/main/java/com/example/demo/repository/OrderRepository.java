@@ -46,73 +46,73 @@ public class OrderRepository {
 		int firstOrderItemId = 0;
 
 		while (rs.next()) {
-			int currentOrderId = rs.getInt("id");
+			int currentOrderId = rs.getInt("order_id");
 			if (currentOrderId != checkOrderId) {
 				order = new Order();
 				orderItemList = new ArrayList<>();
-				order.setId(rs.getInt("id"));
-				order.setUserId(rs.getInt("user_id"));
-				order.setStatus(rs.getInt("status"));
-				order.setTotalPrice(rs.getInt("totalPrice"));
+				order.setId(rs.getInt("order_id"));
+				order.setUserId(rs.getInt("order_user_id"));
+				order.setStatus(rs.getInt("order_status"));
+				order.setTotalPrice(rs.getInt("order_total_price"));
 				order.setOrderDate(rs.getDate("order_date"));
-				order.setDestinationName(rs.getString("destination_name"));
-				order.setDestinationEmail(rs.getString("destination_email"));
-				order.setDestinationZipcode(rs.getString("destination_zipcode"));
-				order.setDestinationAddress(rs.getString("destination_address"));
-				order.setDestinationTel(rs.getString("destination_tel"));
-				order.setDeliveryTime(rs.getTimestamp("delivery_time"));
-				order.setPaymentMethod(rs.getInt("payment_method"));
+				order.setDestinationName(rs.getString("order_destination_name"));
+				order.setDestinationEmail(rs.getString("order_destination_email"));
+				order.setDestinationZipcode(rs.getString("order_destination_zipcode"));
+				order.setDestinationAddress(rs.getString("order_destination_address"));
+				order.setDestinationTel(rs.getString("order_destination_tel"));
+				order.setDeliveryTime(rs.getTimestamp("order_delivery_time"));
+				order.setPaymentMethod(rs.getInt("order_payment_method"));
 				order.setOrderItemList(orderItemList);
 				orderList.add(order);
 
 			}
 
-			if (rs.getInt("order_item_id") != firstOrderItemId) {
+			if (rs.getInt("orderitem_id") != firstOrderItemId) {
 				OrderItem orderItem = new OrderItem();
 				Item item = new Item();
 				toppingList = new ArrayList<>();
 				orderToppingList = new ArrayList<>();
 				orderItemList.add(orderItem);
 
-				orderItem.setId(rs.getInt("id"));
-				orderItem.setItemId(rs.getInt("item_id"));
-				orderItem.setOrderId(rs.getInt("order_id"));
-				orderItem.setQuantity(rs.getInt("quantity"));
-				orderItem.setSize(rs.getString("size"));
+				orderItem.setId(rs.getInt("orderitem_id"));
+				orderItem.setItemId(rs.getInt("orderitem_item_id"));
+				orderItem.setOrderId(rs.getInt("orderitem_order_id"));
+				orderItem.setQuantity(rs.getInt("orderitem_quantity"));
+				orderItem.setSize(rs.getString("orderitem_size").toCharArray()[0]);
 				orderItem.setItem(item);
 				orderItem.setOrderToppingList(orderToppingList);
 
-				item.setId(rs.getInt("id"));
-				item.setName(rs.getString("name"));
-				item.setDescription(rs.getString("description"));
-				item.setPriceM(rs.getInt("price_m"));
-				item.setPriceL(rs.getInt("price_l"));
-				item.setImagePath(rs.getString("image_path"));
-				item.setDeleted(rs.getBoolean("deleted"));
+				item.setId(rs.getInt("item_id"));
+				item.setName(rs.getString("item_name"));
+				item.setDescription(rs.getString("item_description"));
+				item.setPriceM(rs.getInt("item_price_m"));
+				item.setPriceL(rs.getInt("item_price_l"));
+				item.setImagePath(rs.getString("item_image_path"));
+				item.setDeleted(rs.getBoolean("item_deleted"));
 				item.setToppingList(toppingList);
 
 			}
 
-			if (rs.getInt("order_topping_id") != 0) {
+			if (rs.getInt("ordertopping_id") != 0) {
 				OrderTopping orderTopping = new OrderTopping();
 				Topping topping = new Topping();
 				toppingList.add(topping);
 				orderToppingList.add(orderTopping);
 
-				orderTopping.setId(rs.getInt("id"));
-				orderTopping.setToppingId(rs.getInt("topping_id"));
-				orderTopping.setOrderItemId(rs.getInt("order_topping_id"));
+				orderTopping.setId(rs.getInt("ordertopping_id"));
+				orderTopping.setToppingId(rs.getInt("ordertopping_topping_id"));
+				orderTopping.setOrderItemId(rs.getInt("ordertopping_order_item_id"));
 				orderTopping.setTopping(topping);
 
-				topping.setId(rs.getInt("id"));
-				topping.setName(rs.getString("name"));
-				topping.setPriceM(rs.getInt("price_m"));
-				topping.setPriceL(rs.getInt("price_l"));
+				topping.setId(rs.getInt("topping_id"));
+				topping.setName(rs.getString("topping_name"));
+				topping.setPriceM(rs.getInt("topping_price_m"));
+				topping.setPriceL(rs.getInt("topping_price_l"));
 
 			}
 
-			firstOrderItemId = rs.getInt("order_item_id");
-			checkOrderId = rs.getInt("id");
+			firstOrderItemId = rs.getInt("orderitem_id");
+			checkOrderId = rs.getInt("order_id");
 
 		}
 		return orderList;
@@ -133,11 +133,10 @@ public class OrderRepository {
 	 * @param order 注文情報
 	 * @return ID自動採番された注文情報
 	 */
-	@SuppressWarnings("null")
 	public Order insert(Order order) {
 		SqlParameterSource param = new BeanPropertySqlParameterSource(order);
 
-		if (order == null) {
+		if (order.getId() == null) {
 			Number key = insert.executeAndReturnKey(param);
 			order.setId(key.intValue());
 		}

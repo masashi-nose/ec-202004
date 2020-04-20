@@ -18,7 +18,7 @@ public class OrderItem {
 	/** 数量 */
 	private Integer quantity;
 	/** 商品サイズ */
-	private String size;
+	private Character size;
 	/** 商品インスタンス */
 	private Item item;
 	/** 注文トッピングリスト */
@@ -38,7 +38,7 @@ public class OrderItem {
 	public int getSubTotal() {
 		int subTotal = 0;
 
-		if (size == "M") {
+		if (size == 'M') {
 			int toppingPrice = 200 * orderToppingList.size();
 			int itemPrice = item.getPriceM();
 			subTotal = (itemPrice + toppingPrice) * quantity;
@@ -85,11 +85,11 @@ public class OrderItem {
 		this.quantity = quantity;
 	}
 
-	public String getSize() {
+	public Character getSize() {
 		return size;
 	}
 
-	public void setSize(String size) {
+	public void setSize(Character size) {
 		this.size = size;
 	}
 

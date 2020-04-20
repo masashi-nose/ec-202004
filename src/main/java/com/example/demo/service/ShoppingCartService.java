@@ -2,6 +2,8 @@ package com.example.demo.service;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.example.demo.domain.Order;
@@ -18,6 +20,8 @@ import com.example.demo.repository.OrderToppingRepository;
  * @author masashi.nose
  *
  */
+@Service
+@Transactional
 public class ShoppingCartService {
 
 	@Autowired
@@ -41,8 +45,10 @@ public class ShoppingCartService {
 	 * @param form   リクエストパラメータ
 	 * @param userId ユーザーID
 	 */
-	public void insert(ShoppingCartForm form, int userId) {
+	public void insert(ShoppingCartForm form, Integer userId) {
 		Order userOrder = orderRepository.findByUserIdAndStatus(userId, 0);
+		
+		System.out.println("formの中身は:" + form);
 
 //		ユーザーIDで検索した注文情報がなければ、注文オブジェクトを新規作成
 //		orders/orderItems/orderToppingsにインサート	.
@@ -52,15 +58,19 @@ public class ShoppingCartService {
 			order.setStatus(0);
 			order.setTotalPrice(0);
 			order = orderRepository.insert(order);
+			System.out.println("サービスクラスでの注文オブジェクトの中身は:" + order);
+			System.out.println("サービスクラスでの注文オブジェクトの注文IDは:" + order.getId());
 
 //			注文商品オブジェクトを生成し、インサート。
 			OrderItem orderItem = new OrderItem();
 			BeanUtils.copyProperties(form, orderItem);
 			orderItem.setOrderId(order.getId());
+			
 			orderItem = orderItemRepository.insert(orderItem);
+			System.out.println("サービスクラスでのorderItemの中身:" + orderItem);
 
-			if (form.getToppingList() != null) {
-				for (Integer topping : form.getToppingList()) {
+			if (form.getOrderToppingList() != null) {
+				for (Integer topping : form.getOrderToppingList()) {
 					OrderTopping orderTopping = new OrderTopping();
 					orderTopping.setToppingId(topping);
 					orderTopping.setOrderItemId(orderItem.getId());
@@ -76,8 +86,8 @@ public class ShoppingCartService {
 			orderItem.setOrderId(userOrder.getId());
 			orderItem = orderItemRepository.insert(orderItem);
 
-			if (form.getToppingList() != null) {
-				for (Integer topping : form.getToppingList()) {
+			if (form.getOrderToppingList() != null) {
+				for (Integer topping : form.getOrderToppingList()) {
 					OrderTopping orderTopping = new OrderTopping();
 					orderTopping.setToppingId(topping);
 					orderTopping.setOrderItemId(orderItem.getId());

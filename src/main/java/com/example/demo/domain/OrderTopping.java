@@ -14,7 +14,7 @@ public class OrderTopping {
 	private Integer toppingId;
 	/** 注文商品ID */
 	private Integer orderItemId;
-	/** トッピング */
+	/** トッピングインスタンス */
 	private Topping topping;
 
 	@Override

@@ -49,16 +49,14 @@
 			<!-- /.container-fluid -->
 		</nav>
 
-		<form action="cart_list.html">
-
-
+		<form action="cart_list.html" th:action="@{/cart/insert}" method="post">
+			<input type="hidden" name="itemId" th:value="${item.id}">
 			<div class="detail-container">
 				<div class="detail-item">
 					<img src="../static/img_pizza/1.jpg"
 						th:src="@{/img_curry/} + ${item.imagePath}"
 						class="img-responsive img-rounded item-img-center">
 				</div>
-
 
 				<div class="detail-item">
 					<div class="bs-component">
@@ -69,7 +67,6 @@
 
 					<br>
 
-
 					<div class="form-group">
 						<div class="row">
 							<div class="col-sm-12">
@@ -77,7 +74,7 @@
 							</div>
 							<div class="col-sm-12">
 								<label class="radio-inline"> 
-								<input type="radio" name="size" id="priceM" class="size" checked="checked" value="M"> 
+								<input type="radio" name="size" id="priceM" class="size" checked="checked" value="M" > 
 								<span class="price">&nbsp;М&nbsp;</span>&nbsp;&nbsp;
 								<span id="sizeM" th:text="${#numbers.formatInteger(item.priceM, 1, 'COMMA') + '円（税抜）'}"></span>
 								</label> 
@@ -97,7 +94,7 @@
 							<div class="checkbox-inline" id="topping">
 								<div id="toppings" th:each="topping:${item.toppingList}">
 									<label class="checkbox-inline">
-								 		<input	type="checkbox" class="checkbox" th:text="${topping.name}" th:value="${topping.id}">
+								 		<input name="orderToppingList" type="checkbox" class="checkbox" th:text="${topping.name}" th:value="${topping.id}">
 									</label>
 								</div>
 							</div>

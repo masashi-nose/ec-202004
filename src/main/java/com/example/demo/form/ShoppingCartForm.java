@@ -11,50 +11,50 @@ import java.util.List;
 public class ShoppingCartForm {
 
 	/** 商品ID */
-	private String itemId;
+	private Integer itemId;
 	/** 数量 */
-	private String quantity;
+	private Integer quantity;
 	/** サイズ */
-	private String size;
+	private Character size;
 	/** トッピングリスト */
-	private List<Integer> toppingList;
+	private List<Integer> orderToppingList;
 
 	@Override
 	public String toString() {
-		return "ShoppingCartForm [itemId=" + itemId + ", quantity=" + quantity + ", size=" + size + ", toppingList="
-				+ toppingList + "]";
+		return "ShoppingCartForm [itemId=" + itemId + ", quantity=" + quantity + ", size=" + size
+				+ ", orderToppingList=" + orderToppingList + "]";
 	}
 
-	public String getItemId() {
+	public Integer getItemId() {
 		return itemId;
 	}
 
-	public void setItemId(String itemId) {
+	public void setItemId(Integer itemId) {
 		this.itemId = itemId;
 	}
 
-	public String getQuantity() {
+	public Integer getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(String quantity) {
+	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
 
-	public String getSize() {
+	public Character getSize() {
 		return size;
 	}
 
-	public void setSize(String size) {
+	public void setSize(Character size) {
 		this.size = size;
 	}
 
-	public List<Integer> getToppingList() {
-		return toppingList;
+	public List<Integer> getOrderToppingList() {
+		return orderToppingList;
 	}
 
-	public void setToppingList(List<Integer> toppingList) {
-		this.toppingList = toppingList;
+	public void setOrderToppingList(List<Integer> orderToppingList) {
+		this.orderToppingList = orderToppingList;
 	}
 
 }

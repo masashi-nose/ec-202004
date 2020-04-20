@@ -41,12 +41,15 @@ public class OrderItemRepository {
 	 * @return
 	 */
 	public OrderItem insert(OrderItem orderItem) {
+		System.out.println(orderItem);
 		SqlParameterSource param = new BeanPropertySqlParameterSource(orderItem);
 
 		if (orderItem.getId() == null) {
 			Number key = insert.executeAndReturnKey(param);
 			orderItem.setId(key.intValue());
 		}
+		
+		System.out.println(orderItem);
 
 		return orderItem;
 	}
